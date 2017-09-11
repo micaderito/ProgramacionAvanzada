@@ -18,6 +18,7 @@ public class Carrera extends Abstracta{
 	private int cm;
 	private int l;
 	private int[] vecSalida;
+	PrintWriter sal;
 	
 	public Carrera(File archIn,File archOut) throws FileNotFoundException {
 		super(archIn,archOut);
@@ -35,20 +36,26 @@ public class Carrera extends Abstracta{
 		
 		vecCF = new Categoria[cf];
 		for( int i = 0; i<cf;i++) {
-			vecCF[i].setEdadMin(sc.nextInt());
-			vecCF[i].setEdadMax(sc.nextInt());
+			Categoria aux = new Categoria();
+			aux.setEdadMin(sc.nextInt());
+			aux.setEdadMax(sc.nextInt());
+			vecCF[i] = aux;
 		}
 		
 		vecCM = new Categoria[cm];
 		for( int i = 0;i<cm;i++) {
-			vecCM[i].setEdadMin(sc.nextInt());
-			vecCM[i].setEdadMax(sc.nextInt());
+			Categoria aux = new Categoria();
+			aux.setEdadMin(sc.nextInt());
+			aux.setEdadMax(sc.nextInt());
+			vecCM[i] = aux;
 		}
 		
-		vecComp = new Competidor[cantIns];
+		vecComp = new Competidor[cantIns]; 
 		for( int i = 0;i<cantIns;i++) {
-			vecComp[i].setEdad(sc.nextInt());
-			vecComp[i].setSexo(sc.next());
+			Competidor aux = new Competidor();
+			aux.setEdad(sc.nextInt());
+			aux.setSexo(sc.next());
+			vecComp[i] = aux;
 		}
 		
 		vecL = new int[l];
@@ -61,18 +68,19 @@ public class Carrera extends Abstracta{
 	
 	
 	public void cargarSalida(int cat,Categoria[]vecCat, String sexo) {
+		vecSalida = new int[4];
 		for( int i = 0;i<cat;i++) {
 			for(int k = 0;k<4;k++)
 				vecSalida[k]=0;
 			vecSalida[0]=i+1;
 			int j = 0;
-			int p = 0;
+			int p = 1;
 			while(j<l) {
 				int posComp = vecL[j]-1;
-				if(vecComp[posComp].getSexo()== sexo) {
-					if((vecComp[posComp].verCategoria(vecCat)) == vecSalida[0]) {
-						p++;
+				if(vecComp[posComp].getSexo().charAt(0) == sexo.charAt(0)) {
+					if((vecComp[posComp].verCategoria(vecCat)) == vecSalida[0] && p<4) {
 						vecSalida[p] = posComp+1;
+						p++;
 					}	
 				}
 				j++;
@@ -82,32 +90,30 @@ public class Carrera extends Abstracta{
 	}
 	@Override
 	public void resolver() {
-		vecSalida = new int[4];
+		try {
+			sal = new PrintWriter(new FileWriter(salida));
 			cargarSalida(cf, vecCF, "F");
 			cargarSalida(cm, vecCM, "M");
+			sal.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
 	void procesarSalida(File salida) {
 		
-		try {
-			PrintWriter sal;
-			sal = new PrintWriter(new FileWriter(salida));
-			for(int i = 0; i<vecSalida.length; i++) {
-				sal.print(vecSalida[i]);
-			}
-			sal.println(" ");
-			sal.close(); 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for(int i = 0; i<vecSalida.length; i++) {
+			sal.print(vecSalida[i]+" ");
 		}
+		sal.println(" ");
 	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		
-		File archIn = new File("C:\\Users\\micad\\Documents\\UNLaM\\Programacion Avanzada\\Workspace\\Problemas\\ProgramacionAvanzada\\aCorrer\\Preparación de la prueba\\Lote de prueba\\Entrada\\01_medallasErroneas.in");
-		File archOut = new File("C:\\Users\\micad\\Documents\\UNLaM\\Programacion Avanzada\\Workspace\\Problemas\\ProgramacionAvanzada\\aCorrer\\Ejecucion de la prueba\\Salida obtenida\\01_medallasErroneas.out");
+		File archIn = new File("C:\\Users\\micad\\Documents\\UNLaM\\Programacion Avanzada\\Workspace\\Problemas\\ProgramacionAvanzada\\aCorrer\\Preparación de la prueba\\Lote de prueba\\Entrada\\07_carrera.in");
+		File archOut = new File("C:\\Users\\micad\\Documents\\UNLaM\\Programacion Avanzada\\Workspace\\Problemas\\ProgramacionAvanzada\\aCorrer\\Ejecución de la prueba\\Salida obtenida\\07_carera.out");
 				
 		Carrera c1 = new Carrera(archIn,archOut);
 		c1.resolver();
