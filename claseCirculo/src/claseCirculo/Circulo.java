@@ -13,5 +13,9 @@ public class Circulo {
 	public boolean contienePunto(Punto p) {
 		return centro.distanciaHasta(p) <= radio;
 	}
+	
+	public boolean seIntersectan(Circulo c) {
+		return centro.distanciaHasta(c.centro) < (radio+c.radio);
+	}
 
 }

@@ -1,5 +1,6 @@
 package claseCirculo;
 
+
 public class Punto {
 
 	public double x;
@@ -12,5 +13,9 @@ public class Punto {
 	
 	public double distanciaHasta(Punto p) {
 		return (Math.sqrt(Math.pow(p.x - this.x, 2) + Math.pow(p.y - this.y, 2)));
+	}
+	
+	public void verPunto() {
+		System.out.println("(" + this.x + "," + this.y + ")");
 	}
 }
