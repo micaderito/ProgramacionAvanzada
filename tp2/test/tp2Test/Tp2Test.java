@@ -13,7 +13,7 @@ public class Tp2Test {
 	
 	@Before
 	public void setUp() {
-		double[] vec = {4,7,2,-9,-10,1};
+		double[] vec = {6,-10,3,5,-8,4,7,2,-9,-10,1};
 		p1 = new Polinomio(vec);
 	}
 	
@@ -22,7 +22,7 @@ public class Tp2Test {
 	@Test
 	public void queEvalueMultSuc() {
 		long start = System.nanoTime(); //
-		Assert.assertEquals(201, p1.evaluarMSucesivas(2), 0.1);
+		Assert.assertEquals(2121, p1.evaluarMSucesivas(2), 0.1);
 		long fin = System.nanoTime() - start;
 		System.out.println("Tiempo que tardó Multiplicación Sucesivas: " + fin); //nanosegungos
 	}
@@ -30,7 +30,7 @@ public class Tp2Test {
 	@Test
 	public void queEvalueConProgDinamica() {
 		long start = System.nanoTime(); //
-		Assert.assertEquals(201, p1.evaluarProgDinamica(2), 0.1);
+		Assert.assertEquals(2121, p1.evaluarProgDinamica(2), 0.1);
 		long fin = System.nanoTime() - start;
 		System.out.println("Tiempo que tardó Programación Dinámica: " + fin); //nanosegundos		
 	}
@@ -38,7 +38,7 @@ public class Tp2Test {
 	@Test
 	public void queEvalueRecursiva() {
 		long start = System.nanoTime(); //
-		Assert.assertEquals(201, p1.evaluarRecursiva(2), 0.1);
+		Assert.assertEquals(2121, p1.evaluarRecursiva(2), 0.1);
 		long fin = System.nanoTime() - start;
 		System.out.println("Tiempo que tardó Recursiva: " + fin); //nanosegundos		
 	}
@@ -46,7 +46,7 @@ public class Tp2Test {
 	@Test 
 	public void queEvalueRecursivaPar() {
 		long start = System.nanoTime(); //
-		Assert.assertEquals(201, p1.evaluarRecursivaPar(2), 0.1);
+		Assert.assertEquals(2121, p1.evaluarRecursivaPar(2), 0.1);
 		long fin = System.nanoTime() - start;
 		System.out.println("Tiempo que tardó evaluar Recursiva Par: " + fin); //nanosegundos
 	}
@@ -55,7 +55,7 @@ public class Tp2Test {
 	public void queEvalueMejorado() {
 
 		long start = System.nanoTime(); //
-		Assert.assertEquals(201, p1.evaluarMejorada(2), 0.1);
+		Assert.assertEquals(2121, p1.evaluarMejorada(2), 0.1);
 		long fin = System.nanoTime() - start;
 		System.out.println("Tiempo que tardó evaluar Mejorada: " + fin); //nanosegundos
 	}
@@ -63,7 +63,7 @@ public class Tp2Test {
 	@Test
 	public void queEvaluePow() {
 		long start = System.nanoTime(); //
-		Assert.assertEquals(201, p1.evaluarPow(2), 0.1);
+		Assert.assertEquals(2121, p1.evaluarPow(2), 0.1);
 		long fin = System.nanoTime() - start;
 		System.out.println("Tiempo que tardó evaluar Pow: " + fin); //nanosegundos
 	}
@@ -71,7 +71,7 @@ public class Tp2Test {
 	@Test
 	public void queEvalueHorner(){
 		long start = System.nanoTime(); //
-		Assert.assertEquals(201, p1.evaluarHorner(2), 0.1);
+		Assert.assertEquals(2121, p1.evaluarHorner(2), 0.1);
 		long fin = System.nanoTime() - start;
 		System.out.println("Tiempo que tardó evaluar Horner: " + fin); //nanosegundos
 	}

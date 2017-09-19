@@ -65,14 +65,17 @@ public class Polinomio {
 	}
 	
 	public double evaluarMejorada(double x) {
-		double suma = 0;
-		int n = grado;
-		for(int i = 0; i < coeficientes.length; i++) {
-			if( n % 2 == 0)
-				suma+= coeficientes[i]*potencia(x*x,n/2);
-			if( n % 2 != 0)
-				suma+= coeficientes[i]*(x*potencia(x,n-1));
-			n--;
+		double suma = coeficientes[grado] + coeficientes[grado-1]*x;
+		int potactual = 1;
+		int potant = 0;
+		int gradoevaluado = 0;
+		for(int i=grado-1; i>=grado/2; i--) {
+			gradoevaluado = grado - i;
+			potactual*=x;
+			if(i- gradoevaluado >=0)
+				suma+=potactual * potactual * coeficientes[i - gradoevaluado];
+			suma+= potactual * potant * coeficientes[i- gradoevaluado + 1];
+			potant = potactual;
 		}
 		return suma;
 	}
@@ -97,7 +100,7 @@ public class Polinomio {
 	public static void main(String[] args) {
 		
 		
-		double[] vec = {4,7,2,-9,-10,1};
+		double[] vec = {6,-10,3,5,-8,4,7,2,-9,-10,1};
 		Polinomio p1 = new Polinomio(vec);
 		System.out.println("Suc: " + p1.evaluarMSucesivas(2));
 		System.out.println("Recursiva: " + p1.evaluarRecursiva(2));
