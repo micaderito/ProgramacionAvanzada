@@ -1,0 +1,32 @@
+numero(1).
+numero(2).
+numero(3).
+
+ventas(enero,1342).
+ventas(febrero,4231).
+ventas(marzo,5121).
+ventas(abril,5121).
+
+terna(X,Y,Z):-numero(X),numero(Y),numero(Z).
+terna(X,Y):-numero(X),numero(Y).
+
+funcion(X,Y):- X<0, Y is 1 * X,!.
+funcion(X,0):- X==0,!.
+funcion(X,X):- X>0.
+
+productoCartesiano(X,Y):-numero(X),numero(Y).
+seleccion(X,Y):- productoCartesiano(X,Y),X<Y. %ME QUEDO CON EL X MENOR A Y
+proyeccion(X):-seleccion(X,_). %CON EL _ LE INDICO QUE NO ME IMPORTA ESA VARIABLE, USA TODOS
+maximo(X):- numero(X),not(proyeccion(X)).
+
+productoCartesianoVentas(X,Y,Z,W):- ventas(X,Y),ventas(Z,W).
+seleccionVentas(X,Y,Z,W):-productoCartesianoVentas(X,Y,Z,W),Y<W.
+proyeccionVentas(X,Y):-seleccionVentas(X,Y,_,_).
+maximoVentas(X,Y):-ventas(X,Y),not(proyeccionVentas(X,Y)).
+
+factorial(0,1):-!.
+factorial(X,F):- X1 is X-1,factorial(X1,F1), F is X * F1.
+
+fibonacci(0,1):-!.
+fibonacci(1,1):-!.
+fibonacci(X,F):- X1 is X-1, X2 is X-2, fibonacci(X1,F1) + fibonacci(X2,F2), F is F1 + F2.
