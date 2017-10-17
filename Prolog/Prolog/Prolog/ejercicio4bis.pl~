@@ -1,0 +1,27 @@
+parcial1(ana,7).
+parcial1(juan,4).
+parcial1(juancito,7).
+parcial1(pepito,8).
+parcial1(carlos,5).
+parcial1(josesito,6).
+
+parcial2(ana,9).
+parcial2(juan,8).
+parcial2(juancito,6).
+parcial2(pepito,2).
+parcial2(carlos,9).
+parcial2(josesito,7).
+
+sumar(S,N1,N2):-S is N1+N2.
+dividir(D,N,P):-D is N/P.
+
+promociono(X,NFINAL):- parcial1(X,N1),parcial2(X,N2),sumar(S,N1,N2),dividir(NFINAL,S,2),NFINAL >= 7.
+
+curso(X,NFINAL):- parcial1(X,N1),parcial2(X,N2),sumar(S,N1,N2),dividir(NFINAL,S,2),NFINAL >= 4, NFINAL < 7.
+
+reprobo(X,NFINAL):- parcial1(X,N1),parcial2(X,N2),sumar(S,N1,N2),dividir(NFINAL,S,2),NFINAL =< 4.
+
+terna(X,Y):-promociono(_,X),promociono(_,Y).
+seleccion(X,Y):-terna(X,Y), X<Y.
+proyeccion(X):-seleccion(X,_).
+maximo(M,X):- promociono(M,X), not(proyeccion(X).
